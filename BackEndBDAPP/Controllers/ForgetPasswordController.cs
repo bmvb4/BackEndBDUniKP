@@ -14,7 +14,7 @@ namespace BackEndBDAPP.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [RequestRateLimit(Name = "Limit Request Number", Seconds = 1)]
+    //[RequestRateLimit(Name = "Limit Request Code", Seconds = 1)]
     public class ForgetPasswordController : ControllerBase
     {
         private readonly UniKPContext _context = new UniKPContext();
