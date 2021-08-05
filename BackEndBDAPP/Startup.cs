@@ -65,7 +65,7 @@ namespace BackEndBDAPP
             services.AddDbContext<UniKPContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefautDatabase")));
             services.AddEntityFrameworkSqlServer();
             services.AddControllers();
-
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,7 +75,9 @@ namespace BackEndBDAPP
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(x => x.WithOrigins("http://localhost:5200")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();

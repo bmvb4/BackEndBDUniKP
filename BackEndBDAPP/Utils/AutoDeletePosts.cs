@@ -15,10 +15,10 @@ namespace BackEndBDAPP.Utils
         public static async void delete() {
             try
             {
-                var responseTaskPost = await _client.DeleteAsync("https://localhost:5001/autoDelete/post");
-                var responseTaskCode = await _client.DeleteAsync("https://localhost:5001/autoDelete/emailCode");
+                var responseTaskPost = await _client.DeleteAsync("http://localhost:5200/autoDelete/post");
+                var responseTaskCode = await _client.DeleteAsync("http://localhost:5200/autoDelete/emailCode");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }

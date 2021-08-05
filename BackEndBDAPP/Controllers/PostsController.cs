@@ -49,11 +49,11 @@ namespace BackEndBDAPP.Controllers
         }
 
         [HttpGet("getLast/{page}")]
-        public async Task<Object> GetLastImages(int page,[FromBody] User username)
+        public async Task<Object> GetLastImages(int page)
         {
           
-            if (!UserExists(username.Username))
-                return null;
+            //if (!UserExists(username.Username))
+            //    return null;
             return _context.Posts.Join(
                 _context.Users,
                 post => post.IdUser,
@@ -69,8 +69,8 @@ namespace BackEndBDAPP.Controllers
                     UserPhoto = user.Photo,
                     LikesCounter = post.Likes.Count,
                     CommentsCounter = post.Comments.Count,
-                    isFollow = _context.Follows.Any(f => (f.IdFollower == username.Username && f.IdFollowed == user.Username)),
-                    isLiked = _context.Likes.Any(l => l.IdUser == username.Username && l.IdPost == post.IdPost),
+                   // isFollow = _context.Follows.Any(f => (f.IdFollower == username.Username && f.IdFollowed == user.Username)),
+                    //isLiked = _context.Likes.Any(l => l.IdUser == username.Username && l.IdPost == post.IdPost),
                     Tags = _context.Tags1.Where(t => t.IdPost == post.IdPost).Select(t => t.IdTag).ToList()
                 }).OrderByDescending(d => d.DeleteDate).Skip(10 * page).Take(10).ToList();
         }

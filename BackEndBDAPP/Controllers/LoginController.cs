@@ -13,13 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Cors;
 
 namespace BackEndBDAPP.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [RequestRateLimit(Name = "Limit Request Number",Seconds = 5)]
+    //[RequestRateLimit(Name = "Limit Request Number", Seconds = 5)]
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _config;
