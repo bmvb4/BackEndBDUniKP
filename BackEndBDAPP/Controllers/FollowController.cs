@@ -28,6 +28,9 @@ namespace BackEndBDAPP.Controllers
                 return NotFound("Invalid Followed");
             if (!UserExists(value.IdFollower))
                 return NotFound("Invalid Follower");
+            Follow follow = _context.Follows.Where(f => (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).First();
+            if (follow != null)
+                return NotFound("Have it in database");
             try
             {
                 await _context.AddAsync(new Follow{ IdFollowed = value.IdFollowed, IdFollower=value.IdFollower });
