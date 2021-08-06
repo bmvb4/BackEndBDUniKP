@@ -21,5 +21,18 @@ namespace BackEndBDAPP.Utils
             }
             return false;
         }
+        public static String Get(ClaimsPrincipal User)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var identity = User.Identity as ClaimsIdentity;
+                if (identity != null)
+                {
+                    var userId = identity.FindFirst(ClaimTypes.Name)?.Value;
+                    return userId;
+                }
+            }
+            return "";
+        }
     }
 }

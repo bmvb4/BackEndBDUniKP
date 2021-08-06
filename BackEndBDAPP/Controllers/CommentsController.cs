@@ -21,15 +21,15 @@ namespace BackEndBDAPP.Controllers
         }
 
         [HttpGet("comment/get/{id}/{page}")]
-        public Object GetComments(long id,int page,[FromBody]User username)
+        public Object GetComments(long id, int page)
         {
-           
+
             if (!PostExists(id))
                 return null;
-            var rez =_context.Comments.Join(
+            var rez = _context.Comments.Join(
                 _context.Users,
                 comment => comment.IdUser,
-                user => user.Username,
+                user => UserToken.Get(User),
                 (comment, user) => new
                 {
                     IdComment = comment.IdComment,

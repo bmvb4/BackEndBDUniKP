@@ -23,7 +23,7 @@ namespace BackEndBDAPP.Controllers
         }
 
         [HttpGet("getAll/{id}/{page}")]
-        public async Task<Object> GetUserImages(string id,int page,[FromBody]User username)
+        public async Task<Object> GetUserImages(string id, int page)
         {
             if (!UserExists(id))
                 return null;
@@ -42,18 +42,15 @@ namespace BackEndBDAPP.Controllers
                     UserPhoto = user.Photo,
                     LikesCounter = post.Likes.Count,
                     CommentsCounter = post.Comments.Count,
-                    isFollow = _context.Follows.Any(f => (f.IdFollower == username.Username && f.IdFollowed == user.Username)),
-                    isLiked = _context.Likes.Any(l => l.IdUser == username.Username && l.IdPost == post.IdPost),
+                    isFollow = _context.Follows.Any(f => (f.IdFollower == UserToken.Get(User) && f.IdFollowed == user.Username)),
+                    isLiked = _context.Likes.Any(l => l.IdUser == UserToken.Get(User) && l.IdPost == post.IdPost),
                     Tags = _context.Tags1.Where(t => t.IdPost == post.IdPost).Select(t => t.IdTag).ToList()
-                }).Where(w => w.IdUser == id).Skip(10*page).Take(10).ToList();
+                }).Where(w => w.IdUser == id).Skip(10 * page).Take(10).ToList();
         }
 
         [HttpGet("getLast/{page}")]
         public async Task<Object> GetLastImages(int page)
         {
-          
-            //if (!UserExists(username.Username))
-            //    return null;
             return _context.Posts.Join(
                 _context.Users,
                 post => post.IdUser,
@@ -69,14 +66,14 @@ namespace BackEndBDAPP.Controllers
                     UserPhoto = user.Photo,
                     LikesCounter = post.Likes.Count,
                     CommentsCounter = post.Comments.Count,
-                   // isFollow = _context.Follows.Any(f => (f.IdFollower == username.Username && f.IdFollowed == user.Username)),
-                    //isLiked = _context.Likes.Any(l => l.IdUser == username.Username && l.IdPost == post.IdPost),
+                    isFollow = _context.Follows.Any(f => (f.IdFollower == UserToken.Get(User) && f.IdFollowed == user.Username)),
+                    isLiked = _context.Likes.Any(l => l.IdUser == UserToken.Get(User) && l.IdPost == post.IdPost),
                     Tags = _context.Tags1.Where(t => t.IdPost == post.IdPost).Select(t => t.IdTag).ToList()
                 }).OrderByDescending(d => d.DeleteDate).Skip(10 * page).Take(10).ToList();
         }
 
         [HttpGet("get/{id}")]
-        public IActionResult GetImageAsync(long id, User username)
+        public IActionResult GetImageAsync(long id)
         {
             try
             {
@@ -95,8 +92,8 @@ namespace BackEndBDAPP.Controllers
                     UserPhoto = user.Photo,
                     LikesCounter = _context.Likes.Count(l => l.IdPost == post.IdPost),
                     CommentsCounter = _context.Comments.Count(c => c.IdPost == post.IdPost),
-                    isFollow = _context.Follows.Any(f => (f.IdFollower == username.Username && f.IdFollowed == user.Username)),
-                    isLiked = _context.Likes.Any(l => l.IdUser == username.Username && l.IdPost == post.IdPost),
+                    isFollow = _context.Follows.Any(f => (f.IdFollower == UserToken.Get(User) && f.IdFollowed == user.Username)),
+                    isLiked = _context.Likes.Any(l => l.IdUser == UserToken.Get(User) && l.IdPost == post.IdPost),
                     Tags = _context.Tags1.Where(t => t.IdPost == post.IdPost).Select(t => t.IdTag).ToList()
                 }).Where(w => w.idPost == id).First();
                 return Ok(img);
@@ -105,9 +102,6 @@ namespace BackEndBDAPP.Controllers
             {
                 return BadRequest();
             }
-
-
-            
         }
 
         [HttpPut("update/{id}")]

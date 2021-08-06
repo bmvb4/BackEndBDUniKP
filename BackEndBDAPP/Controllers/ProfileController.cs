@@ -23,7 +23,7 @@ namespace BackEndBDAPP.Controllers
         }
 
         [HttpGet("user/get/{id}")]
-        public async Task<IActionResult> GetUser(string id,User username)
+        public async Task<IActionResult> GetUser(string id)
         {
             if (!UserExists(id))
                 return BadRequest();
@@ -38,7 +38,7 @@ namespace BackEndBDAPP.Controllers
                 Follower = u.FollowIdFollowedNavigations.Count,
                 Followed = u.FollowIdFollowerNavigations.Count,
                 PostCount = u.Posts.Count,
-                isFollow = _context.Follows.Any(f => (f.IdFollower == username.Username && f.IdFollowed == id))
+                isFollow = _context.Follows.Any(f => (f.IdFollower == UserToken.Get(User) && f.IdFollowed == id))
             }).Where(w => w.Username == id).First();
             return Ok(usr);
         }
