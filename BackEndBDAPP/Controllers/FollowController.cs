@@ -22,8 +22,7 @@ namespace BackEndBDAPP.Controllers
         [HttpPost]
         public async Task<IActionResult> Follow([FromBody] Follow value)
         {
-            var follow = _context.Follows.Where(f =>
-            (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).ToList();
+            var follow = _context.Follows.Where(f => (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).ToList();
             if (follow.Count != 0)
                 return NotFound("Have it in database");
             if (UserToken.Validate(User, value.IdFollower))
@@ -48,18 +47,18 @@ namespace BackEndBDAPP.Controllers
         [HttpDelete]
         public async Task<IActionResult> Unfollow([FromBody] Follow value)
         {
-            Follow follow = _context.Follows.Where(f => (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).FirstOrDefault(null);
-            if (follow == null)
-                return NotFound();
-            if (UserToken.Validate(User, follow.IdFollower))
+            var follow = _context.Follows.Where(f => (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).ToList();
+            if (follow.Count == 0)
+                return NotFound("Dont exist");
+            if (UserToken.Validate(User, follow[0].IdFollower))
                 return Unauthorized();
             try
             {
-                _context.Follows.Remove(follow);
+                _context.Follows.Remove(follow[0]);
                 await _context.SaveChangesAsync();
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest();
             }
