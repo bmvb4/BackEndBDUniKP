@@ -19,9 +19,8 @@ namespace BackEndBDAPP.Controllers
         public CommentsController(UniKPContext context) {
             _context = context;
         }
-
         [HttpGet("comment/get/{id}/{page}")]
-        public Object GetComments(long id, int page)
+        public Object GetComments(long id, int page, [FromBody] User username)
         {
 
             if (!PostExists(id))
@@ -29,7 +28,7 @@ namespace BackEndBDAPP.Controllers
             var rez = _context.Comments.Join(
                 _context.Users,
                 comment => comment.IdUser,
-                user => UserToken.Get(User),
+                user => user.Username,
                 (comment, user) => new
                 {
                     IdComment = comment.IdComment,
@@ -40,6 +39,27 @@ namespace BackEndBDAPP.Controllers
                 }).Where(w => w.IdPost == id).Skip(10 * page).Take(10).ToList();
             return rez;
         }
+
+        //[HttpGet("comment/get/{id}/{page}")]
+        //public Object GetComments(long id, int page)
+        //{
+
+        //    if (!PostExists(id))
+        //        return null;
+        //    var rez = _context.Comments.Join(
+        //        _context.Users,
+        //        comment => comment.IdUser,
+        //        user => UserToken.Get(User),
+        //        (comment, user) => new
+        //        {
+        //            IdComment = comment.IdComment,
+        //            CommentText = comment.CommentText,
+        //            IdUser = comment.IdUser,
+        //            UserPhoto = user.Photo,
+        //            IdPost = comment.IdPost
+        //        }).Where(w => w.IdPost == id).Skip(10 * page).Take(10).ToList();
+        //    return rez;
+        //}
 
         [HttpPost("comment")]
         public async Task<IActionResult> PostComment([FromBody] Comment value)
