@@ -17,8 +17,8 @@ namespace BackEndBDAPP.Utils
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("asdvfdshjkas435njklsa3hfjasdfjsa3lkjd8sa"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
-                issuer: "http://localhost:5000",
-                audience: "http://localhost:5000",
+                issuer: "http://localhost:5200",
+                audience: "http://localhost:5200",
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(130),
                 signingCredentials: signinCredentials
