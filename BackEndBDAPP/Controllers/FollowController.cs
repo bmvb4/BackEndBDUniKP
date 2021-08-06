@@ -22,15 +22,16 @@ namespace BackEndBDAPP.Controllers
         [HttpPost]
         public async Task<IActionResult> Follow([FromBody] Follow value)
         {
+            var follow = _context.Follows.Where(f =>
+            (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).ToList();
+            if (follow.Count != 0)
+                return NotFound("Have it in database");
             if (UserToken.Validate(User, value.IdFollower))
                 return Unauthorized();
             if (!UserExists(value.IdFollowed))
                 return NotFound("Invalid Followed");
             if (!UserExists(value.IdFollower))
                 return NotFound("Invalid Follower");
-            Follow follow = _context.Follows.Where(f => (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).First();
-            if (follow != null)
-                return NotFound("Have it in database");
             try
             {
                 await _context.AddAsync(new Follow{ IdFollowed = value.IdFollowed, IdFollower=value.IdFollower });
@@ -47,7 +48,7 @@ namespace BackEndBDAPP.Controllers
         [HttpDelete]
         public async Task<IActionResult> Unfollow([FromBody] Follow value)
         {
-            Follow follow = _context.Follows.Where(f => (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).First();
+            Follow follow = _context.Follows.Where(f => (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).FirstOrDefault(null);
             if (follow == null)
                 return NotFound();
             if (UserToken.Validate(User, follow.IdFollower))
