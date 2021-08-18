@@ -44,7 +44,7 @@ namespace BackEndBDAPP.Controllers
             
         }
 
-        [HttpDelete]
+        [HttpPost("unfollow")]
         public async Task<IActionResult> Unfollow([FromBody] Follow value)
         {
             var follow = _context.Follows.Where(f => (f.IdFollowed == value.IdFollowed && f.IdFollower == value.IdFollower)).ToList();

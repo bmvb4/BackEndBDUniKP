@@ -69,7 +69,7 @@ namespace BackEndBDAPP.Controllers
             }
         }
 
-        [HttpDelete("unlike")]
+        [HttpPost("unlike")]
         public async Task<IActionResult> DeleteLike([FromBody] Like value)
         {
             if (UserToken.Validate(User, value.IdUser))
