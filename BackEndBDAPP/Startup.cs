@@ -75,7 +75,7 @@ namespace BackEndBDAPP
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(x => x.WithOrigins("http://localhost:5200")
+            app.UseCors(x => x.WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
             .AllowAnyHeader());
             app.UseHttpsRedirection();
