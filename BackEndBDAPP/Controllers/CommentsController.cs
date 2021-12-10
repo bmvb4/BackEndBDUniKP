@@ -20,7 +20,7 @@ namespace BackEndBDAPP.Controllers
             _context = context;
         }
         [HttpGet("comment/get/{id}/{page}")]
-        public Object GetComments(long id, int page, [FromBody] User username)
+        public Object GetComments(long id, int page)
         {
 
             if (!PostExists(id))
