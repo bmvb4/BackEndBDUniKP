@@ -78,7 +78,7 @@ namespace BackEndBDAPP.Controllers
                 };
                 await _context.AddAsync(commnet);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok(commnet.IdComment);
             }
             catch (Exception ex)
             {
