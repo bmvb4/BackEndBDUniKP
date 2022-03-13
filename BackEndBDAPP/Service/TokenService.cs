@@ -20,7 +20,7 @@ namespace BackEndBDAPP.Utils
                 issuer: "http://localhost:5200",
                 audience: "http://localhost:5200",
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(130),
+                expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
