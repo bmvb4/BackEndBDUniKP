@@ -27,7 +27,7 @@ namespace BackEndBDAPP.Controllers
         {
             if (token.AccessToken == null || token == null)
             {
-                return BadRequest("Invalid client request");
+                return BadRequest("No AccessToken");
             }
             string accessToken = token.AccessToken;
             string refreshToken = token.RefreshToken;
@@ -36,7 +36,7 @@ namespace BackEndBDAPP.Controllers
             var user = _context.Users.SingleOrDefault(u => u.Username == username);
             if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpireTime <= DateTime.Now)
             {
-                return BadRequest("Invalid client request");
+                return BadRequest("User Problem");
             }
             var newAccessToken = _tokenService.GenerateAccessToken(principal.Claims);
             var newRefreshToken = _tokenService.GenerateRefreshToken();
