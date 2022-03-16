@@ -80,7 +80,8 @@ namespace BackEndBDAPP
             app.UseCors(x => x.WithOrigins("http://localhost:4200")
             .AllowAnyMethod()
             .AllowAnyHeader());
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
+            app.UseHsts();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
