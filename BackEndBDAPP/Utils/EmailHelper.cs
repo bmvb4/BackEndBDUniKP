@@ -21,7 +21,7 @@ namespace BackEndBDAPP.Utils
             SmtpClient client = new SmtpClient();
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential("timeshotapp@gmail.com", "beLeaf1999uni");
+            client.Credentials = new System.Net.NetworkCredential("timeshotapp@gmail.com", "q`w1e2r3t4y5");
             client.Host = "smtp.gmail.com";
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
