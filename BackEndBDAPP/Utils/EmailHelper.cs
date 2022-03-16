@@ -25,7 +25,7 @@ namespace BackEndBDAPP.Utils
             client.Host = "smtp.gmail.com";
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-            client.Port = 587;
+            client.Port = 465;
      
 
             try
