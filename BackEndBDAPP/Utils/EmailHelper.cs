@@ -11,7 +11,7 @@ namespace BackEndBDAPP.Utils
         public bool SendEmail(string userEmail, string confirmationLink)
         {
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("admin@beleaf.social");
+            mailMessage.From = new MailAddress("timeshotapp@gmail.com");
             mailMessage.To.Add(new MailAddress(userEmail));
 
             mailMessage.Subject = "Confirm your email";
@@ -21,8 +21,8 @@ namespace BackEndBDAPP.Utils
             SmtpClient client = new SmtpClient();
             client.EnableSsl = true;
             client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential("admin@beleaf.social", "beLeaf1999uni");
-            client.Host = "smtp.titan.email";
+            client.Credentials = new System.Net.NetworkCredential("timeshotapp@gmail.com", "beLeaf1999uni");
+            client.Host = "smtp.gmail.com";
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
             client.Port = 465;
