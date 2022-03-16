@@ -57,10 +57,10 @@ namespace BackEndBDAPP.Controllers
                 user.RefreshToken = refreshToken;
                 user.RefreshTokenExpireTime = DateTime.Now.AddDays(20);
                 var confirmationCode = ComfirmCodeGenerator.GenerateString(6);
-                //EmailHelper emailHelper = new EmailHelper();
-                // emailResponse = emailHelper.SendEmail(user.Email, confirmationCode);
-                //if (!emailResponse)
-                 //   return BadRequest("Email Problem!");
+                EmailHelper emailHelper = new EmailHelper();
+                 bool emailResponse = emailHelper.SendEmail(user.Email, confirmationCode);
+                if (!emailResponse)
+                   return BadRequest("Email Problem!");
                 try
                 {
                     _context.Add(user);
