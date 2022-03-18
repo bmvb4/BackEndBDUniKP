@@ -20,12 +20,12 @@ namespace BackEndBDAPP.Utils
 
             SmtpClient client = new SmtpClient();
             client.EnableSsl = true;
-            client.UseDefaultCredentials = true;
+            //client.UseDefaultCredentials = true;
             client.Credentials = new System.Net.NetworkCredential("admin@beleaf.me", "beLeaf1999uni");
             client.Host = "mail.privateemail.com";
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-            client.Port = 465;
+            client.Port = 587;
 
 
             try
