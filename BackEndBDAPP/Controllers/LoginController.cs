@@ -19,7 +19,7 @@ namespace BackEndBDAPP.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    //[RequestRateLimit(Name = "Limit Request Number", Seconds = 5)]
+    [RequestRateLimit(Name = "Limit Request Number", Seconds = 5)]
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _config;
