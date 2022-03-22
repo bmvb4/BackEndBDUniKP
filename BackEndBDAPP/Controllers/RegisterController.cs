@@ -58,7 +58,7 @@ namespace BackEndBDAPP.Controllers
                 user.RefreshTokenExpireTime = DateTime.Now.AddDays(20);
                 var confirmationCode = ComfirmCodeGenerator.GenerateString(6);
                 EmailHelper emailHelper = new EmailHelper();
-                 bool emailResponse = emailHelper.SendEmail(user.Email, confirmationCode);
+                 bool emailResponse = emailHelper.SendEmail(user.Email, confirmationCode, user.Username);
                 if (!emailResponse)
                    return BadRequest("Email Problem!");
                 try
