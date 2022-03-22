@@ -85,7 +85,7 @@ namespace BackEndBDAPP.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest("Save problem!");
+                    return BadRequest("Save problem!"+ ex.Message);
                 }
             }
             else
