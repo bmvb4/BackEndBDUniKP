@@ -39,7 +39,7 @@ namespace BackEndBDAPP.Controllers
                         Code = confirmationCode
                     };
                     EmailHelper emailHelper = new EmailHelper();
-                    bool emailResponse = emailHelper.SendEmail(user.Email, confirmationCode);
+                    bool emailResponse = emailHelper.SendEmail(user.Email, confirmationCode, comfirmCode.Username);
                     _context.Add(comfirmCode);
                     _context.SaveChanges();
                     return Ok();
