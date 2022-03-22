@@ -22,7 +22,7 @@ namespace BackEndBDAPP
                 {   
                     webBuilder.UseStartup<Startup>();
                     
-                    webBuilder.UseUrls("http://*:5200/");
+                    webBuilder.UseUrls("https://*:5201/");
                 })
             ;
     }
