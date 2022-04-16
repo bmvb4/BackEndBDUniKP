@@ -14,10 +14,11 @@ using System.Text;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
+using System.Web.Http;
 
 namespace BackEndBDAPP.Controllers
 {
-    [Route("/api/[controller]")]
+    [RoutePrefix("api")]
     [ApiController]
     [RequestRateLimit(Name = "Limit Request Number", Seconds = 5)]
     public class LoginController : ControllerBase
@@ -31,9 +32,10 @@ namespace BackEndBDAPP.Controllers
             _context = context;
             _tokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
         }
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] User value)
+        [System.Web.Http.Route("login")]
+        [System.Web.Http.AllowAnonymous]
+        [System.Web.Http.HttpPost]
+        public async Task<IActionResult> PostAsync([System.Web.Http.FromBody] User value)
         {
             IActionResult response = Unauthorized();
 
