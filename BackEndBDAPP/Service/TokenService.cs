@@ -17,8 +17,8 @@ namespace BackEndBDAPP.Utils
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("asdvfdshjkas435njklsa3hfjasdfjsa3lkjd8sa"));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var tokeOptions = new JwtSecurityToken(
-                issuer: "http://localhost:5201",
-                audience: "http://localhost:5201",
+                issuer: "https://beleaf.me",
+                audience: "https://beleaf.me",
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: signinCredentials
