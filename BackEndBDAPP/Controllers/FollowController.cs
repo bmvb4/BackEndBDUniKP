@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace BackEndBDAPP.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class FollowController : ControllerBase
     {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BackEndBDAPP.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SearchController : ControllerBase
     {

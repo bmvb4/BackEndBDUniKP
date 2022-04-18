@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BackEndBDAPP.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     [RequestRateLimit(Name = "Limit Request Number",Seconds = 5)]
     public class EmailController : ControllerBase

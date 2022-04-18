@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace BackEndBDAPP.Controllers
 {
     [Authorize]
-    [Route("posts")]
+    [Route("api/posts")]
     [ApiController]
     public class CommentsController : ControllerBase
     {

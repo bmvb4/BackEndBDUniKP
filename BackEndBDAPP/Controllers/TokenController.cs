@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BackEndBDAPP.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TokenController : ControllerBase
     {

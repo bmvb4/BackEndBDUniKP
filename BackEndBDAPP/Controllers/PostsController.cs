@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BackEndBDAPP.Controllers
 {
     [Authorize]
-    [Route("/api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PostsController : ControllerBase
     {

@@ -12,7 +12,7 @@ using BackEndBDAPP.Utils;
 namespace BackEndBDAPP.Controllers
 {
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ProfileController : ControllerBase
     {

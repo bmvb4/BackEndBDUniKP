@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BackEndBDAPP.Controllers
 {
     [Authorize]
-    [Route("posts")]
+    [Route("api/posts")]
     [ApiController]
     public class LikesController : ControllerBase
     {

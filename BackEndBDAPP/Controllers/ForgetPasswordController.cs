@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BackEndBDAPP.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     //[RequestRateLimit(Name = "Limit Request Code", Seconds = 1)]
     public class ForgetPasswordController : ControllerBase

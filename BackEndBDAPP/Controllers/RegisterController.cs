@@ -17,7 +17,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace BackEndBDAPP.Controllers
 {   
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class RegisterController : ControllerBase
     {
