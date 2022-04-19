@@ -81,7 +81,7 @@ namespace BackEndBDAPP
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(x => x.WithOrigins("https://beleaf.me")
+            app.UseCors(x => x.WithOrigins("https://www.beleaf.me")
             .AllowAnyMethod()
             .AllowAnyHeader());
             app.UseHttpsRedirection();
