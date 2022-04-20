@@ -81,9 +81,13 @@ namespace BackEndBDAPP
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(x => x.WithOrigins("https://www.beleaf.me")
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+            app.UseCors(x => { x.WithOrigins("https://www.beleaf.me")
+             .AllowAnyMethod()
+             .AllowAnyHeader();
+                x.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
             app.UseHttpsRedirection();
             app.UseHsts();
             app.UseRouting();
