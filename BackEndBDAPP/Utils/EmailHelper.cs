@@ -16,7 +16,7 @@ namespace BackEndBDAPP.Utils
 
             mailMessage.Subject = "Confirm your email";
             mailMessage.IsBodyHtml = true;
-            mailMessage.Body = "https://beleaf.me/email/ConfirmEmail?Username="+Username+"&Code="+confirmationLink;
+            mailMessage.Body = "https://beleaf.me/email/Email?Username="+Username+"&Code="+confirmationLink;
 
             SmtpClient client = new SmtpClient();
             client.EnableSsl = true;

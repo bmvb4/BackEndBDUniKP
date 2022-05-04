@@ -56,21 +56,9 @@ namespace BackEndBDAPP.Controllers
                 var refreshToken = _tokenService.GenerateRefreshToken();
                 user.RefreshToken = refreshToken;
                 user.RefreshTokenExpireTime = DateTime.Now.AddDays(20);
-                var confirmationCode = ComfirmCodeGenerator.GenerateString(6);
-                EmailHelper emailHelper = new EmailHelper();
-                 bool emailResponse = emailHelper.SendEmail(user.Email, confirmationCode, user.Username);
-                if (!emailResponse)
-                   return BadRequest("Email Problem!");
                 try
                 {
                     _context.Add(user);
-                    _context.SaveChanges();
-                    ComfirmCode comfirmCode = new ComfirmCode()
-                    {
-                        Username = user.Username,
-                        Code = confirmationCode
-                    };
-                    _context.Add(comfirmCode);
                     _context.SaveChanges();
                     return Ok(new
                     {
