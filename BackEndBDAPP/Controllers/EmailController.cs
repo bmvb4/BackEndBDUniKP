@@ -19,7 +19,7 @@ namespace BackEndBDAPP.Controllers
         {
             _context = context;
         }
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Generate([FromBody] User user) {
             if (user.EmailConfirm==true)
             {
