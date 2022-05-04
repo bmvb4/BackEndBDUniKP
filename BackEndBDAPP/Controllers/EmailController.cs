@@ -21,7 +21,7 @@ namespace BackEndBDAPP.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Generate([FromBody] User userObj) {
-            var user = await _context.Users.FindAsync(userObj);
+            var user = await _context.Users.FindAsync(userObj.Username);
             if (user == null)
                 return NotFound();
             if (user.EmailConfirm==true)
