@@ -40,6 +40,12 @@ namespace BackEndBDAPP.Controllers
             if (_context.Users.Any(user => user.Username.Equals(value.Username)))
             {
                 User user = _context.Users.Where(u => u.Username.Equals(value.Username)).First();
+                if (user.EmailConfirm == false) {
+                    return Ok(new
+                    {
+                        EmailConfirm = user.EmailConfirm
+                    });
+                }
                 var client_post_hash_password = Convert.ToBase64String(Common.SaltHashPassword(
                     Encoding.ASCII.GetBytes(value.Password),
                     user.Salt));
@@ -63,7 +69,8 @@ namespace BackEndBDAPP.Controllers
                         Description = user.Description,
                         Photo = user.Photo,
                         AccessToken = accessToken,
-                        RefreshToken = refreshToken
+                        RefreshToken = refreshToken,
+                        EmailConfirm = user.EmailConfirm
                     });
                 }
             }
