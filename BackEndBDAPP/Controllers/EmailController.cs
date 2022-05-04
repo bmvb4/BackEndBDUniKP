@@ -20,7 +20,10 @@ namespace BackEndBDAPP.Controllers
             _context = context;
         }
         [HttpPost]
-        public async Task<IActionResult> Generate([FromBody] User user) {
+        public async Task<IActionResult> Generate([FromBody] User userObj) {
+            var user = await _context.Users.FindAsync(userObj);
+            if (user == null)
+                return NotFound();
             if (user.EmailConfirm==true)
             {
                 return BadRequest("");
