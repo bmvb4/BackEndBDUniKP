@@ -28,7 +28,7 @@ namespace BackEndBDAPP.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -113,7 +113,6 @@ namespace BackEndBDAPP.Models
                 entity.HasOne(d => d.IdFollowedNavigation)
                     .WithMany(p => p.FollowIdFollowedNavigations)
                     .HasForeignKey(d => d.IdFollowed)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Follow_ToFollowed");
 
                 entity.HasOne(d => d.IdFollowerNavigation)
