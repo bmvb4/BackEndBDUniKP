@@ -33,7 +33,7 @@ namespace BackEndBDAPP
 
             ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
             services.AddMemoryCache();
-           
+            services.AddSwaggerGen();
             services.AddTransient<ITokenService, TokenService>();
             services.AddCronJob<DeleteCornJob>(c =>
             {
@@ -81,6 +81,11 @@ namespace BackEndBDAPP
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Test1 Api v1");
+            });
             app.UseCors(x => { x.WithOrigins("https://www.beleaf.me")
              .AllowAnyMethod()
              .AllowAnyHeader();

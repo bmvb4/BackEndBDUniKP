@@ -20,7 +20,7 @@ namespace BackEndBDAPP.Controllers
             _context = context;
         }
 
-        [HttpPost("user/{search}")]
+        [HttpGet("user/{search}")]
         public async Task<IActionResult> User(string search) {
             if (string.IsNullOrEmpty(search) || string.IsNullOrWhiteSpace(search))
                 return BadRequest("Invalid Search!");
@@ -29,7 +29,7 @@ namespace BackEndBDAPP.Controllers
                 return Ok(users);
             }
         }
-        [HttpPost("tag/{search}")]
+        [HttpGet("tag/{search}")]
         public async Task<IActionResult> Tag(string search)
         {
             if (string.IsNullOrEmpty(search) || string.IsNullOrWhiteSpace(search))
