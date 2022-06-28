@@ -49,7 +49,7 @@ namespace BackEndBDAPP.Controllers
         }
 
         [HttpGet("getAllFollowed/{page}")]
-        public async Task<Object> GetFollowedUserImages( int page)
+        public async Task<Object> GetFollowingUserImages( int page)
         {
             return _context.Posts.Join(
                 _context.Users,
