@@ -48,6 +48,30 @@ namespace BackEndBDAPP.Controllers
                 }).Where(w => w.IdUser == id).Skip(10 * page).Take(10).ToList();
         }
 
+        [HttpGet("getAllFollowed/{page}")]
+        public async Task<Object> GetFollowedUserImages( int page)
+        {
+            return _context.Posts.Join(
+                _context.Users,
+                post => post.IdUser,
+                user => user.Username,
+                (post, user) => new
+                {
+                    IdPost = post.IdPost,
+                    Photo = post.Photo,
+                    Description = post.Description,
+                    CreateDate = post.CreateDate,
+                    DeleteDate = post.DeleteDate,
+                    IdUser = post.IdUser,
+                    UserPhoto = user.Photo,
+                    LikesCounter = post.Likes.Count,
+                    CommentsCounter = post.Comments.Count,
+                    isFollow = _context.Follows.Any(f => (f.IdFollower == UserToken.Get(User) && f.IdFollowed == user.Username)),
+                    isLiked = _context.Likes.Any(l => l.IdUser == UserToken.Get(User) && l.IdPost == post.IdPost),
+                    Tags = _context.Tags1.Where(t => t.IdPost == post.IdPost).Select(t => t.IdTag).ToList()
+                }).Where(w => w.isFollow == true).Skip(10 * page).Take(10).ToList();
+        }
+
         [HttpGet("getLast/{page}")]
         public async Task<Object> GetLastImages(int page)
         {
