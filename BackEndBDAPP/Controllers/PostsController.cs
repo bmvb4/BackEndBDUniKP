@@ -48,7 +48,7 @@ namespace BackEndBDAPP.Controllers
                 }).Where(w => w.IdUser == id).Skip(10 * page).Take(10).ToList();
         }
 
-        [HttpGet("getAllFollowed/{page}")]
+        [HttpGet("getAllFollowing/{page}")]
         public async Task<Object> GetFollowingUserImages( int page)
         {
             return _context.Posts.Join(
