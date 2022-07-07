@@ -28,7 +28,11 @@ namespace BackEndBDAPP.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=159.65.94.122;User ID=sa;Password=beLeaf1999uni;Database=UniKP;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True;Connection Timeout=30;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -185,13 +189,11 @@ namespace BackEndBDAPP.Models
             modelBuilder.Entity<Tag>(entity =>
             {
                 entity.HasKey(e => e.TagName)
-                    .HasName("PK__Tag__BDE0FD1C2FEA6757");
+                    .HasName("PK__tmp_ms_x__BDE0FD1C5306F6F1");
 
                 entity.ToTable("Tag");
 
-                entity.Property(e => e.TagName)
-                    .HasMaxLength(250)
-                    .IsUnicode(false);
+                entity.Property(e => e.TagName).HasMaxLength(250);
             });
 
             modelBuilder.Entity<Tag1>(entity =>
@@ -207,7 +209,6 @@ namespace BackEndBDAPP.Models
                 entity.Property(e => e.IdTag)
                     .IsRequired()
                     .HasMaxLength(250)
-                    .IsUnicode(false)
                     .HasColumnName("Id_Tag");
 
                 entity.HasOne(d => d.IdPostNavigation)
