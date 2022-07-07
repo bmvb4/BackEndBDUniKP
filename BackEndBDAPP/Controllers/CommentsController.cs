@@ -61,6 +61,29 @@ namespace BackEndBDAPP.Controllers
         //    return rez;
         //}
 
+        [HttpPut("comment")]
+        public async Task<IActionResult> PutComment([FromBody] Comment value)
+        {
+            if (UserToken.Validate(User, value.IdUser))
+                return Unauthorized();
+
+            try
+            {
+                var comment = await _context.Comments.FindAsync(value.IdComment);
+                if (comment == null)
+                    return NotFound();
+
+                comment.CommentText = value.CommentText;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                string s = ex.Message;
+            }
+            return Ok("updated");
+        }
+
         [HttpPost("comment")]
         public async Task<IActionResult> PostComment([FromBody] Comment value)
         {
