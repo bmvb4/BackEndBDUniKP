@@ -74,7 +74,6 @@ namespace BackEndBDAPP.Controllers
                     return NotFound();
 
                 comment.CommentText = value.CommentText;
-
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
